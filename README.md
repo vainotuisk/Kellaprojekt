@@ -1,2 +1,2 @@
 # Kellaprojekt
-Kivy töölaua rakendus Raspberry Pi jaoks
+Kivy töölaua rakendus Raspberry Pi jaoks.
