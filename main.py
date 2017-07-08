@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from kivy.app import App
 from kivy.core.text import LabelBase
 from kivy.clock import Clock
