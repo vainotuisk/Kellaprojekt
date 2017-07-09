@@ -5,7 +5,8 @@ from kivy.clock import Clock
 from time import strftime
 import urllib.request
 import json
-address_param = urllib.parse.urlencode({'address': "Pärnu"})
+linn = "Pärnu"
+address_param = urllib.parse.urlencode({'address': linn})
 target = "http://api.openweathermap.org/data/2.5/weather?q="+address_param+"&appid=312148cec8dfac78058217072b44201e"
 connection = urllib.request.urlopen(target)
 raw_data = connection.read()
