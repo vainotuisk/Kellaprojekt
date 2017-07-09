@@ -11,12 +11,12 @@ connection = urllib.request.urlopen(target)
 raw_data = connection.read()
 print ("Retrieved {0} characters".format(len(raw_data)))
 parsed_data = json.loads(raw_data)
-temperatuurC = round(parsed_data['main']['temp'] - 273,1)
+temperatuurC = int(parsed_data['main']['temp'] - 273)
 print(temperatuurC)
-tuul = parsed_data['wind']['speed']
+tuul = int(parsed_data['wind']['speed'])
 # suund millegipärast json-st ära kadunud
 try:
-    suund = parsed_data['wind']['deg']
+    suund = int(parsed_data['wind']['deg'])
 except:
     suund = '-'
 kirjeldus = parsed_data['weather'][0]['description']
@@ -30,7 +30,7 @@ class KellApp(App):
         Clock.schedule_interval(self.update_suund,6)
         Clock.schedule_interval(self.update_suund,6)
     def update_temperatuur(self,nap):
-        self.root.ids.temperatuur.text = str(temperatuurC) + '[b] C [/b]'
+        self.root.ids.temperatuur.text = str(temperatuurC) + '[b]\xb0 C [/b]'
     def update_tuul(self,nap):
         self.root.ids.tuul.text= str(tuul) + '[b] m/s[/b]'
     def update_suund(self,nap):
