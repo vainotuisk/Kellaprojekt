@@ -11,18 +11,30 @@ connection = urllib.request.urlopen(target)
 raw_data = connection.read()
 print ("Retrieved {0} characters".format(len(raw_data)))
 parsed_data = json.loads(raw_data)
-temperatuurC = parsed_data['main']['temp'] - 273
+temperatuurC = round(parsed_data['main']['temp'] - 273,1)
+print(temperatuurC)
 tuul = parsed_data['wind']['speed']
-suund = parsed_data['wind']['deg']
+# suund millegipärast json-st ära kadunud
+try:
+    suund = parsed_data['wind']['deg']
+except:
+    suund = '-'
 kirjeldus = parsed_data['weather'][0]['description']
 class KellApp(App):
     def update_time(self,nap):
         self.root.ids.time.text= strftime('%H:[b]%M:%S[/b]')
     def on_start(self):
         Clock.schedule_interval(self.update_time,1)
-        Clock.schedule_interval(self.update_temperatuur,1)
+        Clock.schedule_interval(self.update_temperatuur,6)
+        Clock.schedule_interval(self.update_tuul,6)
+        Clock.schedule_interval(self.update_suund,6)
+        Clock.schedule_interval(self.update_suund,6)
     def update_temperatuur(self,nap):
-        self.root.ids.temperatuur.text = 'muudetud temperatuur'
+        self.root.ids.temperatuur.text = str(temperatuurC) + '[b] C [/b]'
+    def update_tuul(self,nap):
+        self.root.ids.tuul.text= str(tuul) + '[b] m/s[/b]'
+    def update_suund(self,nap):
+        self.root.ids.suund.text= str(suund) + '[b]\xb0[/b]'
 if __name__ == '__main__':
 
     LabelBase.register(name='Aino',fn_regular='Aino-Regular.ttf',fn_bold='Aino-Headline.ttf',fn_bolditalic='Aino-Bold.ttf')
