@@ -4,6 +4,7 @@ from kivy.core.text import LabelBase
 from kivy.clock import Clock
 from time import strftime
 import urllib.request
+import datetime
 import json
 linn = "Pärnu"
 address_param = urllib.parse.urlencode({'address': linn})
@@ -15,7 +16,7 @@ parsed_data = json.loads(raw_data)
 temperatuurC = int(parsed_data['main']['temp'] - 273)
 print(temperatuurC)
 tuul = int(parsed_data['wind']['speed'])
-# suund millegipärast json-st ära kadunud
+d = datetime.date.today().strftime("%A %d. %B %Y")
 try:
     suund = int(parsed_data['wind']['deg'])
 except:
@@ -30,6 +31,7 @@ class KellApp(App):
         Clock.schedule_interval(self.update_tuul,6)
         Clock.schedule_interval(self.update_suund,6)
         Clock.schedule_interval(self.update_suund,6)
+        self.root.ids.kuup.text = str(d)
     def update_temperatuur(self,nap):
         self.root.ids.temperatuur.text = str(temperatuurC) + '[b]\xb0 C [/b]'
     def update_tuul(self,nap):
