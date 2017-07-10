@@ -6,6 +6,8 @@ from time import strftime
 import urllib.request
 import datetime
 import json
+import locale
+locale.setlocale(locale.LC_TIME, "et_EE")
 linn = "Pärnu"
 address_param = urllib.parse.urlencode({'address': linn})
 target = "http://api.openweathermap.org/data/2.5/weather?q="+address_param+"&appid=312148cec8dfac78058217072b44201e"
@@ -17,6 +19,7 @@ temperatuurC = int(parsed_data['main']['temp'] - 273)
 print(temperatuurC)
 tuul = int(parsed_data['wind']['speed'])
 d = datetime.date.today().strftime("%A %d. %B %Y")
+
 try:
     suund = int(parsed_data['wind']['deg'])
 except:
