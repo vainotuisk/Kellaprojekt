@@ -41,6 +41,8 @@ class KellApp(App):
         self.root.ids.tuul.text= str(tuul) + '[b] m/s[/b]'
     def update_suund(self,nap):
         self.root.ids.suund.text= str(suund) + '[b]\xb0[/b]'
+#TODO
+# popup linna valimiseks
 if __name__ == '__main__':
 
     LabelBase.register(name='Aino',fn_regular='Aino-Regular.ttf',fn_bold='Aino-Headline.ttf',fn_bolditalic='Aino-Bold.ttf')
